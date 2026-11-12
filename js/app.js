@@ -1,163 +1,270 @@
-const S = JSON.parse(
-  sessionStorage.getItem("sqrl") ||
-    '{"joined":[],"declined":[],"pending":{},"app":0}',
-);
-const save = () => sessionStorage.setItem("sqrl", JSON.stringify(S));
-const $ = (q) => document.querySelector(q);
-const $$ = (q) => [...document.querySelectorAll(q)];
+// ---------- Стан прототипу ----------
+// Зберігається в sessionStorage, щоб не губитися при переході між сторінками.
 
-const count = () => 5 + S.joined.length;
-const lack = (n) =>
-  "Бракує " + (7 - n) + (7 - n === 1 ? " гравця" : " гравців");
-const appStatus = () =>
-  S.app && Date.now() - S.app > 4000 ? "ok" : S.app ? "sent" : "";
+const STORAGE_KEY = 'sqrl';
+const START_PLAYERS = 5;
+const TEAM_SIZE = 7;
+const ANSWER_DELAY = 3000;
+const APPROVE_DELAY = 4000;
 
-function homePage() {
-  const st = appStatus();
-  $("#team-count").textContent = count() + " / 7";
-  const line = $("#team-status");
-  line.textContent =
-    st === "ok"
-      ? "Заявку підтверджено"
-      : st
-        ? "Заявку подано"
-        : count() < 7
-          ? lack(count())
-          : "Склад повний - можна подати заявку";
-  line.classList.toggle("ok", st === "ok");
-  if (st === "ok") {
-    $("#next-match").textContent = "Сб · 07:00";
-    $("#next-text").textContent =
-      "тиждень сортування, проти Девонських драконів";
+function loadState() {
+  const saved = sessionStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    return JSON.parse(saved);
+  }
+  return {
+    joined: [],          // гравці, які прийняли запрошення
+    declined: [],        // гравці, які відхилили запрошення
+    pending: {},         // гравці, які ще думають: id -> час відповіді
+    applicationTime: 0   // коли подано заявку (0 - ще не подано)
+  };
+}
+
+function saveState() {
+  sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function resetState() {
+  sessionStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+const state = loadState();
+
+function teamSize() {
+  return START_PLAYERS + state.joined.length;
+}
+
+function missingText() {
+  const missing = TEAM_SIZE - teamSize();
+  if (missing === 1) {
+    return 'Бракує 1 гравця';
+  }
+  return 'Бракує ' + missing + ' гравців';
+}
+
+// Повертає '', 'sent' (подано) або 'approved' (підтверджено)
+function applicationStatus() {
+  if (!state.applicationTime) {
+    return '';
+  }
+  const passed = Date.now() - state.applicationTime;
+  if (passed > APPROVE_DELAY) {
+    return 'approved';
+  }
+  return 'sent';
+}
+
+
+// ---------- Головна ----------
+
+function initHomePage() {
+  const status = applicationStatus();
+  const statusLine = document.getElementById('team-status');
+
+  document.getElementById('team-count').textContent = teamSize() + ' / 7';
+
+  if (status === 'approved') {
+    statusLine.textContent = 'Заявку підтверджено';
+    statusLine.classList.add('ok');
+    document.getElementById('next-match').textContent = 'Сб · 07:00';
+    document.getElementById('next-text').textContent = 'тиждень сортування, проти Девонських драконів';
+  } else if (status === 'sent') {
+    statusLine.textContent = 'Заявку подано';
+  } else if (teamSize() < TEAM_SIZE) {
+    statusLine.textContent = missingText();
+  } else {
+    statusLine.textContent = 'Склад повний - можна подати заявку';
   }
 }
 
-function schedulePage() {
-  const ok = appStatus() === "ok";
-  $("#sort-week").classList.toggle("hl", ok);
-  $("#sort-text").innerHTML = ok
-    ? "Сб 07:00 · поле 1 · Девонські дракони<small>Кваліфікаційний матч</small>"
-    : "Матчі з’являться після підтвердження заявки";
+
+// ---------- Розклад ----------
+
+function initSchedulePage() {
+  if (applicationStatus() !== 'approved') {
+    return;
+  }
+  document.getElementById('sort-week').classList.add('hl');
+  document.getElementById('sort-text').innerHTML =
+    'Сб 07:00 · поле 1 · Девонські дракони<small>Кваліфікаційний матч</small>';
 }
 
-function teamPage() {
-  const rows = $$(".row");
-  const freeSlots = (pos) => $$('.slot[data-pos="' + pos + '"] .free').length;
-  const waiting = (pos) =>
-    rows.filter((r) => S.pending[r.dataset.id] && r.dataset.pos === pos).length;
 
-  function status(row, kind) {
-    const f = row.dataset.f;
-    const text = {
-      wait: "Очікує відповіді",
-      ok: f ? "Прийняла запрошення" : "Прийняв запрошення",
-      no: f ? "Відхилила запрошення" : "Відхилив запрошення",
-    };
-    row.querySelector(".act").innerHTML =
-      '<span class="st st-' + kind + '">' + text[kind] + "</span>";
-  }
+// ---------- Моя команда ----------
 
-  function join(row) {
-    const free = $('.slot[data-pos="' + row.dataset.pos + '"] .free');
-    free.outerHTML =
-      '<span class="new">' + row.querySelector("b").textContent + "</span>";
-  }
+function initTeamPage() {
+  const rows = document.querySelectorAll('.row');
 
-  function answer(row) {
-    const id = row.dataset.id;
-    delete S.pending[id];
-    if (row.dataset.declines) {
-      S.declined.push(id);
-      status(row, "no");
-    } else {
-      S.joined.push(id);
-      status(row, "ok");
-      join(row);
+  // Показуємо тільки гравців, які підходять під фільтри
+  function applyFilters() {
+    const level = document.getElementById('f-level').value;
+    const region = document.getElementById('f-region').value;
+    const position = document.getElementById('f-pos').value;
+    let lastVisible = null;
+
+    rows.forEach(function (row) {
+      const fits = row.dataset.level === level
+        && row.dataset.region === region
+        && row.dataset.pos === position;
+      row.hidden = !fits;
+      row.classList.remove('last');
+      if (fits) {
+        lastVisible = row;
+      }
+    });
+
+    if (lastVisible) {
+      lastVisible.classList.add('last');
     }
-    save();
-    update();
+    document.getElementById('empty').hidden = lastVisible !== null;
   }
 
-  function wait(row) {
-    status(row, "wait");
-    setTimeout(
-      () => answer(row),
-      Math.max(0, S.pending[row.dataset.id] - Date.now()),
-    );
-  }
-
-  function filter() {
-    const lvl = $("#f-level").value,
-      reg = $("#f-region").value,
-      pos = $("#f-pos").value;
-    rows.forEach(
-      (r) =>
-        (r.hidden = !(
-          r.dataset.level === lvl &&
-          r.dataset.region === reg &&
-          r.dataset.pos === pos
-        )),
-    );
-    const shown = rows.filter((r) => !r.hidden);
-    rows.forEach((r) =>
-      r.classList.toggle("last", r === shown[shown.length - 1]),
-    );
-    $("#empty").hidden = shown.length > 0;
-  }
-
-  function update() {
-    $$(".row button").forEach((b) => {
-      const pos = b.closest(".row").dataset.pos;
-      b.disabled = freeSlots(pos) - waiting(pos) <= 0;
+  // Скільки місць на позиції ще можна запропонувати
+  function openPlaces(position) {
+    const freeSlots = document.querySelectorAll('.slot[data-pos="' + position + '"] .free').length;
+    let waiting = 0;
+    rows.forEach(function (row) {
+      if (row.dataset.pos === position && state.pending[row.dataset.id]) {
+        waiting++;
+      }
     });
-    const n = count(),
-      st = appStatus(),
-      btn = $("#submit"),
-      hint = $("#hint");
-    $("#roster-count").textContent = "Склад · " + n + " / 7";
-    btn.disabled = n < 7 || !!st;
-    btn.textContent = st
-      ? "Заявку на тиждень сортування подано"
-      : "Подати заявку на тиждень сортування";
-    hint.textContent =
-      st === "ok"
-        ? "Заявку підтверджено - команду допущено до тижня сортування"
-        : st
-          ? "Заявку подано - очікує підтвердження організатора"
-          : n < 7
-            ? lack(n) + " - заявку можна подати лише за складу 7 / 7"
-            : "Склад повний - заявку можна подати";
-    hint.classList.toggle("ok", st === "ok" || (n === 7 && !st));
+    return freeSlots - waiting;
   }
 
-  rows.forEach((row) => {
+  // Замінює кнопку «Запросити» на текстовий статус
+  function showStatus(row, kind) {
+    const female = row.dataset.f;
+    let text = 'Очікує відповіді';
+    if (kind === 'ok') {
+      text = female ? 'Прийняла запрошення' : 'Прийняв запрошення';
+    }
+    if (kind === 'no') {
+      text = female ? 'Відхилила запрошення' : 'Відхилив запрошення';
+    }
+    row.querySelector('.act').innerHTML = '<span class="st st-' + kind + '">' + text + '</span>';
+  }
+
+  // Ставить гравця на перше вільне місце його позиції
+  function addToRoster(row) {
+    const freeSlot = document.querySelector('.slot[data-pos="' + row.dataset.pos + '"] .free');
+    const name = row.querySelector('b').textContent;
+    freeSlot.outerHTML = '<span class="new">' + name + '</span>';
+  }
+
+  // Гравець відповідає на запрошення
+  function receiveAnswer(row) {
     const id = row.dataset.id;
-    if (S.joined.includes(id)) {
-      status(row, "ok");
-      join(row);
-    } else if (S.declined.includes(id)) status(row, "no");
-    else if (S.pending[id]) wait(row);
-    row.querySelector("button")?.addEventListener("click", () => {
-      S.pending[id] = Date.now() + 3000;
-      save();
-      wait(row);
-      update();
+    delete state.pending[id];
+
+    if (row.dataset.declines) {
+      state.declined.push(id);
+      showStatus(row, 'no');
+    } else {
+      state.joined.push(id);
+      showStatus(row, 'ok');
+      addToRoster(row);
+    }
+
+    saveState();
+    updatePage();
+  }
+
+  function waitForAnswer(row) {
+    showStatus(row, 'wait');
+    const timeLeft = state.pending[row.dataset.id] - Date.now();
+    setTimeout(function () {
+      receiveAnswer(row);
+    }, Math.max(0, timeLeft));
+  }
+
+  function sendInvite(row) {
+    state.pending[row.dataset.id] = Date.now() + ANSWER_DELAY;
+    saveState();
+    waitForAnswer(row);
+    updatePage();
+  }
+
+  function submitApplication() {
+    state.applicationTime = Date.now();
+    saveState();
+    updatePage();
+    setTimeout(updatePage, APPROVE_DELAY + 100);
+  }
+
+  // Оновлює кнопки, лічильник складу і підказку під кнопкою заявки
+  function updatePage() {
+    const size = teamSize();
+    const status = applicationStatus();
+    const submitButton = document.getElementById('submit');
+    const hint = document.getElementById('hint');
+
+    document.querySelectorAll('.row button').forEach(function (button) {
+      const position = button.closest('.row').dataset.pos;
+      button.disabled = openPlaces(position) <= 0;
     });
+
+    document.getElementById('roster-count').textContent = 'Склад · ' + size + ' / 7';
+
+    submitButton.disabled = size < TEAM_SIZE || status !== '';
+    if (status === '') {
+      submitButton.textContent = 'Подати заявку на тиждень сортування';
+    } else {
+      submitButton.textContent = 'Заявку на тиждень сортування подано';
+    }
+
+    hint.classList.remove('ok');
+    if (status === 'approved') {
+      hint.textContent = 'Заявку підтверджено - команду допущено до тижня сортування';
+      hint.classList.add('ok');
+    } else if (status === 'sent') {
+      hint.textContent = 'Заявку подано - очікує підтвердження організатора';
+    } else if (size < TEAM_SIZE) {
+      hint.textContent = missingText() + ' - заявку можна подати лише за складу 7 / 7';
+    } else {
+      hint.textContent = 'Склад повний - заявку можна подати';
+      hint.classList.add('ok');
+    }
+  }
+
+  // Відновлюємо те, що вже відбулося, і підключаємо кнопки
+  rows.forEach(function (row) {
+    const id = row.dataset.id;
+
+    if (state.joined.includes(id)) {
+      showStatus(row, 'ok');
+      addToRoster(row);
+    } else if (state.declined.includes(id)) {
+      showStatus(row, 'no');
+    } else if (state.pending[id]) {
+      waitForAnswer(row);
+    } else {
+      row.querySelector('button').addEventListener('click', function () {
+        sendInvite(row);
+      });
+    }
   });
 
-  $$("select").forEach((s) => s.addEventListener("change", filter));
-  $("#submit").addEventListener("click", () => {
-    S.app = Date.now();
-    save();
-    update();
-    setTimeout(update, 4100);
+  document.querySelectorAll('.filters select').forEach(function (select) {
+    select.addEventListener('change', applyFilters);
   });
-  if (appStatus() === "sent") setTimeout(update, 4100 - (Date.now() - S.app));
+  document.getElementById('submit').addEventListener('click', submitApplication);
 
-  filter();
-  update();
+  if (applicationStatus() === 'sent') {
+    const timeLeft = state.applicationTime + APPROVE_DELAY - Date.now();
+    setTimeout(updatePage, timeLeft + 100);
+  }
+
+  applyFilters();
+  updatePage();
 }
 
-({ home: homePage, team: teamPage, schedule: schedulePage })[
-  document.body.dataset.page
-]?.();
+
+// ---------- Запуск ----------
+
+document.getElementById('reset').addEventListener('click', resetState);
+
+const page = document.body.dataset.page;
+if (page === 'home') initHomePage();
+if (page === 'team') initTeamPage();
+if (page === 'schedule') initSchedulePage();

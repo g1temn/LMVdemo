@@ -162,3 +162,5 @@ main > :nth-child(2) { animation-delay: .08s; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 .weeks .sub { margin-top: 24px; }
+.reset { background: none; border: none; padding: 0; color: var(--sun); font-weight: 700; text-decoration: underline; cursor: pointer; transition: color var(--ease); }
+.reset:hover { color: var(--sun-soft); }
