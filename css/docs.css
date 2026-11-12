@@ -15,25 +15,7 @@
 figure { margin: 26px 0; }
 figcaption { margin-top: 12px; text-align: center; font-size: var(--fs-md); color: var(--muted); }
 
-.hta { font-size: var(--fs-sm); line-height: 1.25; color: var(--ink); }
-.hta .node { position: relative; background: var(--white); border: 2px solid var(--ink); padding: 22px 8px 10px; text-align: center; }
-.hta .node i { position: absolute; left: 5px; top: 2px; font-style: normal; font-size: var(--fs-xs); }
-.hta .plan { margin: 0; text-align: left; font-size: var(--fs-xs); line-height: 1.4; }
-.hta-top { position: relative; display: flex; justify-content: center; padding-bottom: 36px; }
-.hta-top .root { width: 420px; font-size: var(--fs-xl); padding: 26px 16px 18px; }
-.hta-top .plan { position: absolute; left: calc(50% + 230px); top: 4px; }
-.hta-top::after { content: ''; position: absolute; left: 50%; bottom: 0; height: 36px; border-left: 2px solid var(--ink); }
-.hta-kids { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding-top: 28px; }
-.hta-kids::before { content: ''; position: absolute; top: 0; left: 12.5%; right: 12.5%; border-top: 2px solid var(--ink); }
-.hta-col { position: relative; display: flex; flex-direction: column; }
-.hta-col::before { content: ''; position: absolute; left: 50%; top: -28px; height: 28px; border-left: 2px solid var(--ink); }
-.hta-col > .node { min-height: 74px; display: flex; align-items: center; justify-content: center; font-size: var(--fs-base); }
-.leaves { list-style: none; margin: 0 !important; padding: 0 0 0 34px !important; }
-.leaves li { margin: 18px 0 0 !important; min-height: 60px; display: flex; align-items: center; justify-content: center; }
-.leaves li::before { content: ''; position: absolute; left: -22px; top: 50%; width: 22px; border-top: 2px solid var(--ink); }
-.leaves li::after { content: ''; position: absolute; left: -24px; top: -20px; height: calc(50% + 21px); border-left: 2px solid var(--ink); }
-.leaves li:first-child::after { top: -20px; }
-.hta-col > .plan { margin-top: 14px; padding-left: 6px; }
+.hta-img { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
 
 .palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .sw { border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; font-size: var(--fs-sm); line-height: 1.5; }

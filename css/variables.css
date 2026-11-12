@@ -1,27 +1,27 @@
 :root {
-  --navy: #21295C;
-  --navy-2: #1B3B6F;
-  --navy-line: #3A4479;
-  --sea: #065A82;
-  --sea-soft: #E6EEF4;
-  --mist: #9EB3C2;
-  --sun: #F2B33D;
-  --sun-hover: #F6C866;
-  --sun-soft: #FCE7B2;
-  --sand: #FBF6EC;
-  --white: #FFFFFF;
-  --green: #2F7A4D;
-  --green-light: #8FD3A9;
-  --red: #A33A2B;
-  --ink: #0F1530;
-  --muted: #3E4760;
-  --on-navy: #E9EFF4;
-  --line: #DED3BC;
-  --row-line: #E5DCC8;
-  --field-line: #8C97AE;
+  --navy: #21295c;
+  --navy-2: #1b3b6f;
+  --navy-line: #3a4479;
+  --sea: #065a82;
+  --sea-soft: #e6eef4;
+  --mist: #9eb3c2;
+  --sun: #f2b33d;
+  --sun-hover: #f6c866;
+  --sun-soft: #fce7b2;
+  --sand: #fbf6ec;
+  --white: #ffffff;
+  --green: #2f7a4d;
+  --green-light: #8fd3a9;
+  --red: #a33a2b;
+  --ink: #0f1530;
+  --muted: #3e4760;
+  --on-navy: #e9eff4;
+  --line: #ded3bc;
+  --row-line: #e5dcc8;
+  --field-line: #8c97ae;
 
-  --font-head: 'Lora', Georgia, serif;
-  --font-body: 'Nunito', Arial, sans-serif;
+  --font-head: "Lora", Georgia, serif;
+  --font-body: "Nunito", Arial, sans-serif;
 
   --fs-xs: 13px;
   --fs-sm: 14px;
@@ -43,5 +43,5 @@
   --radius-md: 12px;
   --radius-pill: 999px;
   --container: 1200px;
-  --ease: .2s ease;
+  --ease: 0.2s ease;
 }
