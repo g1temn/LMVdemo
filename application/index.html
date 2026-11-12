@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SQRL - Заявка на тиждень сортування</title>
+    <link rel="icon" href="../assets/logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito:wght@400;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/application.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../index.html"
+          ><img src="../assets/logo.svg" alt="" /><span>SQRL</span></a
+        >
+        <nav class="nav">
+          <a href="../index.html">Головна</a>
+          <a href="../team/index.html">Моя команда</a>
+          <a href="index.html" class="active">Заявка</a>
+          <a href="#" data-soon="Розклад з’явиться після тижня сортування"
+            >Розклад і результати</a
+          >
+        </nav>
+        <div class="header-right">
+          <span class="header-user"
+            ><span class="avatar">ДМ</span>Драко Малфой</span
+          >
+          <a class="docs-link" href="../docs/index.html">Документація</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="page-head">
+          <span class="pill">Тиждень сортування · сезон 2026</span>
+          <h1>Заявка на тиждень сортування</h1>
+          <p>
+            Перевірте склад команди, підтвердьте подачу заявки та стежте за її
+            статусом.
+          </p>
+        </div>
+
+        <div class="app-layout">
+          <!-- 4.1 Перевірити повноту складу -->
+          <section class="card check" aria-labelledby="check-title">
+            <div class="label" id="check-title">Перевірка складу</div>
+            <ul class="checklist" id="checklist"></ul>
+            <table class="roster-table">
+              <thead>
+                <tr>
+                  <th>Позиція</th>
+                  <th>Гравець</th>
+                  <th>Вік</th>
+                  <th>Статус</th>
+                </tr>
+              </thead>
+              <tbody id="roster-body"></tbody>
+            </table>
+            <a class="back-link" href="../team/index.html" id="back-link"
+              >← Повернутися до складу команди</a
+            >
+          </section>
+
+          <!-- 4.2 Підтвердити подачу · 4.3 Переглянути статус -->
+          <aside class="card-dark confirm" aria-labelledby="confirm-title">
+            <div class="label">Заявка команди</div>
+            <h2 id="confirm-title">Вілтширські виверни</h2>
+            <dl class="summary">
+              <div>
+                <dt>Капітан</dt>
+                <dd>Драко Малфой</dd>
+              </div>
+              <div>
+                <dt>Рівень</dt>
+                <dd>Seniors</dd>
+              </div>
+              <div>
+                <dt>Регіон</dt>
+                <dd>Південна Англія</dd>
+              </div>
+              <div>
+                <dt>Склад</dt>
+                <dd id="sum-count">5 / 7</dd>
+              </div>
+            </dl>
+
+            <div id="confirm-box">
+              <label class="agree" id="agree-label">
+                <input type="checkbox" id="agree" />
+                <span
+                  >Підтверджую, що всі гравці погодилися грати за команду
+                  протягом сезону</span
+                >
+              </label>
+              <button
+                class="btn btn-primary btn-block"
+                id="confirm-btn"
+                type="button"
+                disabled
+              >
+                Підтвердити подачу заявки
+              </button>
+              <p class="confirm-hint" id="confirm-hint"></p>
+            </div>
+
+            <div class="status-box" id="status-box" hidden>
+              <div class="label">Статус заявки</div>
+              <ol class="timeline" id="timeline">
+                <li data-k="sent">
+                  <b>Заявку подано</b
+                  ><small>Склад 7 / 7 надіслано організатору</small>
+                </li>
+                <li data-k="review">
+                  <b>Розгляд організатором</b
+                  ><small>Перевірка рівня та регіону гравців</small>
+                </li>
+                <li data-k="ok">
+                  <b>Допуск до тижня сортування</b
+                  ><small>Розклад з’явиться після жеребкування</small>
+                </li>
+              </ol>
+              <a
+                class="btn btn-primary btn-block"
+                href="../index.html"
+                id="home-btn"
+                >На головну</a
+              >
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-links">
+          <a href="#" data-soon="Сторінка ліги поза сценарієм">Про лігу</a> ·
+          <a href="#" data-soon="Довідка поза сценарієм">FAQ</a> ·
+          <a href="#" data-soon="Контакти поза сценарієм">Контакти</a>
+        </div>
+        <button class="reset-link" id="reset-demo" type="button">
+          Скинути демо-дані
+        </button>
+      </div>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/application.js"></script>
+  </body>
+</html>

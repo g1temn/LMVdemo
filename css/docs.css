@@ -1,0 +1,208 @@
+/* ==========================================================
+   SQRL - сторінка документації (спрощений стиль документа)
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 1280px;
+  background: #f4f1ea;
+  color: var(--ink);
+  font: 18px/1.6 var(--font-body);
+}
+.doc-wrap {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.doc-header {
+  background: var(--navy);
+  border-bottom: 4px solid var(--sun);
+  color: var(--white);
+}
+.doc-header .doc-wrap {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 72px;
+}
+.doc-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sun-soft);
+  text-decoration: none;
+  font: 700 24px var(--font-head);
+}
+.doc-brand img {
+  width: 42px;
+  height: 42px;
+}
+.doc-crumb {
+  flex: 1;
+  color: var(--mist);
+}
+.doc-back {
+  color: var(--sun);
+  font-weight: 800;
+  text-decoration: none;
+}
+.doc-back:hover {
+  text-decoration: underline;
+}
+
+.doc-body {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  padding-top: 36px;
+  padding-bottom: 80px;
+  align-items: start;
+}
+.toc {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 16px;
+}
+.toc b {
+  font-family: var(--font-head);
+  color: var(--navy);
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.toc a {
+  color: var(--ink);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-left: 3px solid transparent;
+}
+.toc a:hover {
+  border-left-color: var(--sun);
+  color: var(--sea);
+}
+
+.doc {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 48px 64px;
+}
+.doc h1 {
+  font: 700 46px/1.15 var(--font-head);
+  color: var(--navy);
+  margin: 0 0 12px;
+}
+.doc .lead {
+  color: var(--muted);
+  font-size: 19px;
+  margin: 0 0 12px;
+}
+.doc section {
+  padding-top: 28px;
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.doc h2 {
+  font: 700 32px/1.2 var(--font-head);
+  color: var(--navy);
+  margin: 0 0 16px;
+}
+.doc h3 {
+  font: 800 19px var(--font-body);
+  color: var(--sea);
+  margin: 24px 0 8px;
+}
+.doc p {
+  margin: 0 0 12px;
+  text-align: justify;
+}
+.doc ul {
+  margin: 0 0 12px;
+  padding-left: 24px;
+}
+.doc li {
+  margin-bottom: 8px;
+}
+.doc a {
+  color: var(--sea);
+}
+
+figure {
+  margin: 24px 0;
+  text-align: center;
+}
+figure img {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: 100%;
+}
+.fig-hta {
+  width: 820px;
+}
+.fig-palette {
+  width: 760px;
+  border: 1px solid var(--line);
+}
+.fig-font {
+  width: 760px;
+}
+figcaption {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.colors {
+  list-style: none;
+  padding: 0 !important;
+}
+.colors li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.colors i {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  margin-top: 2px;
+}
+
+.tcap {
+  margin-top: 16px !important;
+  font-weight: 700;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+th,
+td {
+  border: 1px solid #c9bfa9;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background: var(--sand);
+  color: var(--navy);
+}
+code {
+  font-size: 15px;
+  background: var(--sand);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.fig-coolors {
+  width: 560px;
+}

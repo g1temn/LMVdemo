@@ -1,0 +1,189 @@
+/* ==========================================================
+   SQRL - сторінка заявки на тиждень сортування
+   ========================================================== */
+.app-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: var(--gap);
+  align-items: start;
+}
+
+/* ---------- Перевірка складу ---------- */
+.checklist {
+  list-style: none;
+  margin: 18px 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.checklist li {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--green-soft);
+  font-weight: 700;
+}
+.checklist li.bad {
+  background: var(--red-soft);
+}
+.checklist .mark {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--green);
+  color: var(--white);
+  font-weight: 800;
+}
+.checklist li.bad .mark {
+  background: var(--red);
+}
+
+.roster-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 17px;
+}
+.roster-table th {
+  text-align: left;
+  font-size: var(--fs-label);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sea);
+  padding: 10px 8px;
+  border-bottom: 2px solid var(--navy);
+}
+.roster-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.roster-table td:first-child {
+  color: var(--muted);
+}
+.roster-table .free {
+  color: #b07a12;
+  font-weight: 800;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 22px;
+  font-weight: 800;
+}
+
+/* ---------- Підтвердження ---------- */
+.confirm {
+  position: sticky;
+  top: 24px;
+}
+.confirm h2 {
+  margin: 6px 0 18px;
+}
+.summary {
+  margin: 0 0 24px;
+}
+.summary div {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+.summary dt {
+  color: var(--mist);
+}
+.summary dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.agree {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 17px;
+}
+.agree input {
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 0;
+  accent-color: var(--sun);
+  cursor: pointer;
+  flex: none;
+}
+.agree.off {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.agree.off input {
+  cursor: not-allowed;
+}
+.confirm .btn {
+  font-size: 19px;
+  padding: 16px;
+}
+.confirm-hint {
+  margin-top: 12px;
+  color: var(--mist);
+  font-size: 16px;
+  text-align: center;
+}
+
+/* ---------- Статус ---------- */
+.timeline {
+  list-style: none;
+  margin: 16px 0 26px;
+  padding: 0 0 0 8px;
+}
+.timeline li {
+  position: relative;
+  padding: 0 0 22px 36px;
+  border-left: 2px solid var(--line-dark);
+}
+.timeline li:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 2px solid var(--mist);
+}
+.timeline b {
+  display: block;
+  color: var(--mist);
+  font-size: 18px;
+}
+.timeline small {
+  color: var(--mist);
+  font-size: 15px;
+}
+.timeline li.done {
+  border-left-color: #5db884;
+}
+.timeline li.done::before {
+  background: #5db884;
+  border-color: #5db884;
+}
+.timeline li.done b {
+  color: var(--white);
+}
+.timeline li.now::before {
+  border-color: var(--sun);
+  background: var(--sun);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.timeline li.now b {
+  color: var(--sun);
+}

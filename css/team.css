@@ -1,0 +1,263 @@
+/* ==========================================================
+   SQRL - сторінка «Моя команда»: пошук гравців і склад
+   ========================================================== */
+.team-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: var(--gap);
+  align-items: start;
+}
+
+/* ---------- Пошук ---------- */
+.search {
+  display: flex;
+  flex-direction: column;
+}
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+.filters-hint {
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.results-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 26px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--navy);
+}
+#result-count {
+  font-weight: 800;
+  color: var(--navy);
+}
+.position-note {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.position-note.open {
+  color: var(--green);
+}
+.position-note.closed {
+  color: #8a5a00;
+}
+
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 560px;
+  overflow-y: auto;
+}
+.player {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 16px 8px 16px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background var(--speed);
+}
+.player:hover {
+  background: #fdfaf3;
+}
+.player .avatar {
+  width: 52px;
+  height: 52px;
+  font-size: 18px;
+}
+.player-name {
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--ink);
+}
+.player-meta {
+  color: var(--muted);
+  font-size: 16px;
+}
+.player-note {
+  color: var(--muted);
+  font-size: 14px;
+  font-style: italic;
+}
+.player .action {
+  min-width: 210px;
+  display: flex;
+  justify-content: flex-end;
+}
+.player.highlight {
+  animation: flash 1.2s ease-out;
+}
+@keyframes flash {
+  from {
+    background: var(--sun-soft);
+  }
+}
+
+.empty {
+  padding: 48px 12px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty b {
+  display: block;
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+/* ---------- Склад ---------- */
+.roster {
+  position: sticky;
+  top: 24px;
+}
+.roster-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.roster-counter {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 44px;
+  color: var(--sun);
+  line-height: 1;
+}
+.roster-counter small {
+  font-size: 26px;
+  color: var(--mist);
+}
+.roster-counter.full {
+  color: #8fd3a9;
+}
+.roster h2 {
+  margin: 6px 0 14px;
+}
+.progress {
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  background: var(--sun);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+.progress span.full {
+  background: #5db884;
+}
+.roster-meta {
+  color: var(--mist);
+  font-size: 16px;
+  margin: 12px 0 8px;
+}
+
+.slots {
+  list-style: none;
+  margin: 0 0 26px;
+  padding: 0;
+}
+.slot {
+  display: grid;
+  grid-template-columns: 170px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-dark);
+  font-size: 18px;
+}
+.slot-pos {
+  color: var(--mist);
+}
+.slot-name {
+  color: var(--white);
+  font-weight: 700;
+}
+.slot-name.cap::after {
+  content: " · капітан";
+  color: var(--mist);
+  font-weight: 400;
+  font-size: 15px;
+}
+.slot-free {
+  justify-self: start;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--sun);
+  font-weight: 800;
+  cursor: pointer;
+  border-bottom: 2px dashed rgba(242, 179, 61, 0.5);
+  transition: border-color var(--speed);
+}
+.slot-free:hover {
+  border-bottom-color: var(--sun);
+}
+.slot-wait {
+  color: var(--mist);
+  font-style: italic;
+  font-size: 16px;
+}
+.slot.new {
+  animation: slot-in 1.4s ease-out;
+}
+@keyframes slot-in {
+  from {
+    background: rgba(93, 184, 132, 0.35);
+  }
+}
+.slot-tag {
+  font-size: 13px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+.slot-tag.ok {
+  background: rgba(93, 184, 132, 0.2);
+  color: #8fd3a9;
+}
+
+.submit-box .btn {
+  font-size: 19px;
+  padding: 16px;
+}
+.submit-hint {
+  margin-top: 12px;
+  color: var(--mist);
+  font-size: 16px;
+  text-align: center;
+}
+.submit-hint.ok {
+  color: #8fd3a9;
+  font-weight: 700;
+}
+.submitted {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  background: rgba(93, 184, 132, 0.14);
+  border: 1px solid rgba(93, 184, 132, 0.5);
+  border-radius: 14px;
+  padding: 18px;
+}
+.submitted b {
+  color: #8fd3a9;
+  font-size: 19px;
+}
+.submitted a {
+  color: var(--sun);
+  font-weight: 800;
+}

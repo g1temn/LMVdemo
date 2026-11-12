@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SQRL - Моя команда</title>
+    <link rel="icon" href="../assets/logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito:wght@400;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/team.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="../index.html"
+          ><img src="../assets/logo.svg" alt="" /><span>SQRL</span></a
+        >
+        <nav class="nav">
+          <a href="../index.html">Головна</a>
+          <a href="index.html" class="active">Моя команда</a>
+          <a href="../application/index.html">Заявка</a>
+          <a href="#" data-soon="Розклад з’явиться після тижня сортування"
+            >Розклад і результати</a
+          >
+        </nav>
+        <div class="header-right">
+          <span class="header-user"
+            ><span class="avatar">ДМ</span>Драко Малфой</span
+          >
+          <a class="docs-link" href="../docs/index.html">Документація</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="page-head">
+          <span class="pill">Перед сезоном · збір команди</span>
+          <h1>Моя команда</h1>
+          <p>
+            Знайдіть гравців на вільні позиції та надішліть їм запрошення. Коли
+            склад стане 7 / 7, подайте заявку.
+          </p>
+        </div>
+
+        <div class="team-layout">
+          <!-- 2. Знайти гравців · 3. Запросити гравця -->
+          <section class="card search" aria-labelledby="search-title">
+            <div class="label" id="search-title">Знайти гравців</div>
+            <form class="filters" id="filters" onsubmit="return false;">
+              <div class="field">
+                <label for="f-level">Рівень</label>
+                <select id="f-level"></select>
+              </div>
+              <div class="field">
+                <label for="f-region">Регіон</label>
+                <select id="f-region"></select>
+              </div>
+              <div class="field">
+                <label for="f-position">Позиція</label>
+                <select id="f-position"></select>
+              </div>
+            </form>
+            <p class="filters-hint">
+              Рівень і регіон підставлено з вашого профілю.
+            </p>
+
+            <div class="results-head">
+              <span id="result-count"></span>
+              <span class="position-note" id="position-note"></span>
+            </div>
+            <ul class="results" id="results" aria-live="polite"></ul>
+          </section>
+
+          <!-- 1. Переглянути склад · 4. Подати заявку -->
+          <aside class="card-dark roster" aria-labelledby="roster-title">
+            <div class="roster-top">
+              <div class="label">Склад команди</div>
+              <span class="roster-counter" id="roster-counter"
+                >5<small> / 7</small></span
+              >
+            </div>
+            <h2 id="roster-title">Вілтширські виверни</h2>
+            <div class="progress" aria-hidden="true">
+              <span id="progress-bar"></span>
+            </div>
+            <p class="roster-meta">
+              Seniors · Південна Англія · капітан Драко Малфой
+            </p>
+            <ul class="slots" id="slots"></ul>
+            <div class="submit-box" id="submit-box">
+              <button
+                class="btn btn-primary btn-block"
+                id="submit-btn"
+                type="button"
+                disabled
+              >
+                Подати заявку на тиждень сортування
+              </button>
+              <p class="submit-hint" id="submit-hint"></p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-links">
+          <a href="#" data-soon="Сторінка ліги поза сценарієм">Про лігу</a> ·
+          <a href="#" data-soon="Довідка поза сценарієм">FAQ</a> ·
+          <a href="#" data-soon="Контакти поза сценарієм">Контакти</a>
+        </div>
+        <button class="reset-link" id="reset-demo" type="button">
+          Скинути демо-дані
+        </button>
+      </div>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/team.js"></script>
+  </body>
+</html>

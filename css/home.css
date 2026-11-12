@@ -1,0 +1,217 @@
+/* ==========================================================
+   SQRL - головна сторінка гравця
+   ========================================================== */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--gap);
+}
+.next-step {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.next-step h2 {
+  font-size: 40px;
+}
+.next-text {
+  color: var(--mist);
+  font-size: 19px;
+  max-width: 760px;
+}
+.next-step .btn {
+  align-self: flex-start;
+  margin-top: 8px;
+  font-size: 19px;
+  padding: 14px 34px;
+}
+
+.stepper {
+  list-style: none;
+  margin: 14px 0 4px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.stepper li {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line-dark);
+}
+.stepper .num {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 20px;
+  border: 2px solid var(--mist);
+  color: var(--mist);
+}
+.stepper b {
+  display: block;
+  color: var(--white);
+}
+.stepper small {
+  color: var(--mist);
+  font-size: 15px;
+}
+.stepper li.current {
+  border-color: var(--sun);
+  background: rgba(242, 179, 61, 0.1);
+}
+.stepper li.current .num {
+  border-color: var(--sun);
+  color: var(--sun);
+}
+.stepper li.done .num {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--white);
+}
+.stepper li.done small {
+  color: #9fd8b5;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.avatar-xl {
+  width: 88px;
+  height: 88px;
+  font-size: 32px;
+  border-width: 3px;
+  margin-bottom: 8px;
+}
+.profile .meta {
+  color: var(--muted);
+}
+.facts {
+  margin: 14px 0 10px;
+  width: 100%;
+}
+.facts div {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+.facts dt {
+  color: var(--muted);
+}
+.facts dd {
+  margin: 0;
+  font-weight: 700;
+}
+.small-link {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.team-card h3,
+.info-card h3 {
+  margin: 8px 0 16px;
+}
+.team-card {
+  display: flex;
+  flex-direction: column;
+}
+.team-card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.slot-list {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+}
+.slot-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+}
+.slot-list li span:first-child {
+  color: var(--muted);
+}
+.slot-list li b {
+  font-weight: 700;
+}
+.slot-list .free {
+  color: #b07a12;
+  font-weight: 800;
+}
+.slot-list .wait {
+  color: var(--sea);
+  font-weight: 700;
+}
+
+.info-card p {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.ticks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ticks li {
+  padding-left: 28px;
+  position: relative;
+}
+.ticks li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 7px;
+  width: 12px;
+  height: 7px;
+  border-left: 3px solid var(--green);
+  border-bottom: 3px solid var(--green);
+  transform: rotate(-45deg);
+}
+
+.feed {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  max-height: 330px;
+  overflow-y: auto;
+}
+.feed li {
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+}
+.feed li:first-child {
+  border-top: none;
+}
+.feed time {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+}
+.feed .ok {
+  color: var(--green);
+  font-weight: 800;
+}
+.feed .no {
+  color: var(--red);
+  font-weight: 800;
+}
