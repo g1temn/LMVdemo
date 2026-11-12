@@ -6,7 +6,7 @@
   var $ = function (id) {
     return document.getElementById(id);
   };
-  var fresh = null; // id гравця, який щойно приєднався (для підсвічування)
+  var fresh = null;
 
   function fillSelect(sel, values, current) {
     sel.innerHTML = values

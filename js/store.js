@@ -1,8 +1,3 @@
-/* ==========================================================
-   SQRL - стан прототипу та імітація відповідей гравців.
-   Стан живе в sessionStorage лише в межах вкладки браузера,
-   щоб його можна було передавати між сторінками без бази даних.
-   ========================================================== */
 var Store = (function () {
   var KEY = "sqrl-lab3-state";
   var D = SQRL_DATA;
@@ -42,7 +37,6 @@ var Store = (function () {
     })[0];
   }
 
-  // Розподіл складу за слотами: [{position, player|null}]
   function slots() {
     var left = state.roster.map(player);
     return D.slots.map(function (pos) {
@@ -71,7 +65,7 @@ var Store = (function () {
       );
     }).length;
   }
-  // Скільки ще запрошень можна надіслати на позицію
+
   function openFor(pos) {
     return Math.max(0, freeSlots(pos) - pendingFor(pos));
   }

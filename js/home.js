@@ -1,6 +1,3 @@
-/* ==========================================================
-   SQRL - головна: наступний крок, стан складу, сповіщення
-   ========================================================== */
 (function () {
   var $ = function (id) {
     return document.getElementById(id);
@@ -28,7 +25,6 @@
     var vacant = Store.vacantPositions();
     $("team-count").textContent = n + " / 7";
 
-    // --- наступний крок і кроки сценарію ---
     var steps = { team: "", apply: "", ok: "" };
     var title, text, btn, href;
     if (!full) {
@@ -91,7 +87,6 @@
       li.querySelector("small").textContent = sub[k];
     });
 
-    // --- склад за позиціями ---
     var pendingByPos = {};
     Store.data.players.forEach(function (p) {
       var inv = Store.inviteOf(p.id);
@@ -114,7 +109,6 @@
       })
       .join("");
 
-    // --- сповіщення ---
     var dyn = Store.events.map(function (e) {
       var p = e.id ? Store.player(e.id) : null,
         h;

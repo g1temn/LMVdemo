@@ -1,6 +1,3 @@
-/* ==========================================================
-   SQRL - заявка: перевірка складу (4.1), підтвердження (4.2), статус (4.3)
-   ========================================================== */
 (function () {
   var $ = function (id) {
     return document.getElementById(id);
@@ -16,7 +13,6 @@
       return i && i.status === "pending";
     }).length;
 
-    // 4.1 Перевірити повноту складу
     var checks = [
       {
         ok: full,
@@ -88,7 +84,6 @@
     $("back-link").hidden = full && !!app;
     $("sum-count").textContent = n + " / 7";
 
-    // 4.2 Підтвердити подачу заявки
     if (!app) {
       $("confirm-box").hidden = false;
       $("status-box").hidden = true;
@@ -103,7 +98,6 @@
       return;
     }
 
-    // 4.3 Переглянути статус заявки
     $("confirm-box").hidden = true;
     $("status-box").hidden = false;
     var approved = app.status === "approved";

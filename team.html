@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQRL - Моя команда</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="team">
+  <header class="header">
+    <div class="header-in">
+      <a class="brand" href="index.html"><img src="assets/logo.svg" alt=""><span>SQRL</span></a>
+      <nav class="nav">
+      <a href="index.html">Головна</a>
+      <a href="team.html" class="active">Моя команда</a>
+      <a href="schedule.html">Розклад і результати</a>
+      </nav>
+      <div class="user">Драко Малфой · <a href="docs.html">Документація</a></div>
+    </div>
+  </header>
+
+  <main>
+    <div>
+      <span class="ctx">Перед сезоном · збір команди</span>
+      <h1 class="title">Моя команда</h1>
+    </div>
+    <div class="two">
+      <section class="card search">
+        <p class="label">Знайти гравців</p>
+        <div class="filters">
+          <label class="fld">Рівень<select id="f-level"><option>Kids</option><option>Adult Casual</option><option>Adult Serious</option><option selected>Seniors</option><option>Legends</option></select></label>
+          <label class="fld">Регіон<select id="f-region"><option selected>Південна Англія</option><option>Північна Англія</option><option>Мідлендс</option><option>Уельс</option><option>Шотландія</option></select></label>
+          <label class="fld">Позиція<select id="f-pos"><option selected>Переслідувач</option><option>Загонич</option><option>Кіпер</option><option>Шукач</option></select></label>
+        </div>
+        <div class="rows">
+          <div class="row" data-id="mclaggen" data-pos="Переслідувач" data-level="Seniors" data-region="Південна Англія" data-declines="1"><span class="who"><b>Кормак Маклаґен</b><br><span class="muted">47 років · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="nott" data-pos="Переслідувач" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Теодор Нотт</b><br><span class="muted">46 років · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="pucey" data-pos="Переслідувач" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Адріан П’юсі</b><br><span class="muted">50 років · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="montague" data-pos="Переслідувач" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Ґрем Монтеґ</b><br><span class="muted">49 років · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="bell" data-pos="Переслідувач" data-level="Seniors" data-region="Південна Англія" data-f="1"><span class="who"><b>Кеті Белл</b><br><span class="muted">47 років · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="crabbe" data-pos="Загонич" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Вінсент Креб</b><br><span class="muted">46 років · загонич</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="derrick" data-pos="Загонич" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Перегрін Деррік</b><br><span class="muted">50 років · загонич</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="bole" data-pos="Загонич" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Люціан Боул</b><br><span class="muted">50 років · загонич</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="bletchley" data-pos="Кіпер" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Майлз Блечлі</b><br><span class="muted">49 років · кіпер</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="wood" data-pos="Кіпер" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Олівер Вуд</b><br><span class="muted">51 рік · кіпер</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="higgs" data-pos="Шукач" data-level="Seniors" data-region="Південна Англія"><span class="who"><b>Терренс Гіґґз</b><br><span class="muted">49 років · шукач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="macmillan" data-pos="Переслідувач" data-level="Seniors" data-region="Мідлендс"><span class="who"><b>Ерні Макміллан</b><br><span class="muted">46 років · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="smith" data-pos="Переслідувач" data-level="Seniors" data-region="Північна Англія"><span class="who"><b>Захарія Сміт</b><br><span class="muted">46 років · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="jordan" data-pos="Загонич" data-level="Seniors" data-region="Уельс"><span class="who"><b>Лі Джордан</b><br><span class="muted">48 років · загонич</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="cho" data-pos="Шукач" data-level="Seniors" data-region="Шотландія" data-f="1"><span class="who"><b>Чо Чанг</b><br><span class="muted">47 років · шукач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="bagman" data-pos="Загонич" data-level="Legends" data-region="Південна Англія"><span class="who"><b>Людо Беґмен</b><br><span class="muted">77 років · загонич</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="creevey" data-pos="Переслідувач" data-level="Adult Serious" data-region="Південна Англія"><span class="who"><b>Денніс Кріві</b><br><span class="muted">42 роки · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <div class="row" data-id="vane" data-pos="Переслідувач" data-level="Adult Casual" data-region="Південна Англія" data-f="1"><span class="who"><b>Ромільда Вейн</b><br><span class="muted">44 роки · переслідувач</span></span><span class="act"><button class="btn btn-sea" type="button">Запросити</button></span></div>
+          <p class="empty muted" id="empty" hidden>Немає гравців за цими фільтрами</p>
+        </div>
+      </section>
+      <section class="dark roster">
+        <p class="label" id="roster-count">Склад · 5 / 7</p>
+        <h2>Вілтширські виверни</h2>
+        <div class="slot" data-pos="Шукач"><span>Шукач</span><span>Драко Малфой</span></div>
+        <div class="slot" data-pos="Кіпер"><span>Кіпер</span><span>Маркус Флінт</span></div>
+        <div class="slot" data-pos="Загонич"><span>Загонич</span><span>Ґреґорі Ґойл</span></div>
+        <div class="slot" data-pos="Загонич"><span>Загонич</span><span>Пенсі Паркінсон</span></div>
+        <div class="slot" data-pos="Переслідувач"><span>Переслідувач</span><span>Блез Забіні</span></div>
+        <div class="slot" data-pos="Переслідувач"><span>Переслідувач</span><span class="free">вільно</span></div>
+        <div class="slot" data-pos="Переслідувач"><span>Переслідувач</span><span class="free">вільно</span></div>
+        <button class="btn btn-sun" id="submit" type="button" disabled>Подати заявку на тиждень сортування</button>
+        <p class="hint" id="hint">Бракує 2 гравців - заявку можна подати лише за складу 7 / 7</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">Про лігу · FAQ · Контакти</footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

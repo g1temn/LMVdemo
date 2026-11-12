@@ -1,159 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SQRL - Головна гравця</title>
-    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito:wght@400;700;800&display=swap"
-    />
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/home.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <a class="brand" href="index.html"
-          ><img src="assets/logo.svg" alt="" /><span>SQRL</span></a
-        >
-        <nav class="nav">
-          <a href="index.html" class="active">Головна</a>
-          <a href="team/index.html">Моя команда</a>
-          <a href="application/index.html">Заявка</a>
-          <a href="#" data-soon="Розклад з’явиться після тижня сортування"
-            >Розклад і результати</a
-          >
-        </nav>
-        <div class="header-right">
-          <span class="header-user"
-            ><span class="avatar">ДМ</span>Драко Малфой</span
-          >
-          <a class="docs-link" href="docs/index.html">Документація</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQRL - Головна гравця</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nunito:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <header class="header">
+    <div class="header-in">
+      <a class="brand" href="index.html"><img src="assets/logo.svg" alt=""><span>SQRL</span></a>
+      <nav class="nav">
+      <a href="index.html" class="active">Головна</a>
+      <a href="team.html">Моя команда</a>
+      <a href="schedule.html">Розклад і результати</a>
+      </nav>
+      <div class="user">Драко Малфой · <a href="docs.html">Документація</a></div>
+    </div>
+  </header>
+
+  <main>
+    <div><span class="ctx">Сезон 2026 · перед тижнем сортування</span></div>
+    <div class="home-grid">
+      <section class="dark profile">
+        <div class="profile-top">
+          <div class="avatar">ДМ</div>
+          <div>
+            <p class="hello">Вітаємо,</p>
+            <h1>Драко Малфой</h1>
+          </div>
         </div>
-      </div>
-    </header>
-
-    <main>
-      <div class="container">
-        <div class="page-head">
-          <span class="pill">Сезон 2026 · підготовка до тижня сортування</span>
-          <h1>Вітаємо, Драко!</h1>
-          <p>
-            Зберіть повний склад команди та подайте заявку - на тижні сортування
-            команди розподілять за дивізіонами.
-          </p>
+        <p class="meta">46 років · шукач · Seniors · Південна Англія</p>
+        <p class="team">Команда: <b>Вілтширські виверни</b></p>
+        <div class="stats">
+          <div><b>10</b><span>матчів у 2025</span></div>
+          <div><b>7</b><span>сничів у 2025</span></div>
+          <div><b>21</b><span>очко команди</span></div>
         </div>
+      </section>
+      <section class="notice">
+        <p class="label">Сповіщення</p>
+        <p class="notice-title">Тиждень сортування: прийом заявок відкрито</p>
+        <p>Зберіть повний склад 7 / 7 і подайте заявку до початку тижня сортування.</p>
+        <a href="team.html">Перейти до складу команди</a>
+      </section>
+      <section class="card small">
+        <p class="label">Наступний матч</p>
+        <p class="h" id="next-match">Сортування</p>
+        <p class="muted" id="next-text">розклад з’явиться після підтвердження заявки</p>
+      </section>
+      <section class="card small">
+        <p class="label">Рейтинг 2025</p>
+        <p class="h">2-ге місце</p>
+        <p class="muted">з 6 команд дивізіону</p>
+      </section>
+      <section class="card wide">
+        <p class="label">Моя команда</p>
+        <p class="h">Вілтширські виверни · <span id="team-count">5 / 7</span></p>
+        <p class="team-status" id="team-status">Бракує 2 гравців</p>
+        <div><a class="btn btn-p" href="team.html">Склад команди</a></div>
+      </section>
+      <section class="card wide">
+        <p class="label">Останній матч · сезон 2025</p>
+        <p class="h">170 : 60</p>
+        <p class="muted">перемога над «Дорсетськими гриндилоу»</p>
+        <div><a class="btn btn-s" href="schedule.html">Усі результати</a></div>
+      </section>
+    </div>
+  </main>
 
-        <div class="home-grid">
-          <!-- Наступний крок: точка входу в завдання з HTA -->
-          <section class="card-dark next-step" aria-labelledby="next-title">
-            <div class="label">Наступний крок</div>
-            <h2 id="next-title">Доберіть гравців у команду</h2>
-            <p class="next-text" id="next-text"></p>
-            <ol class="stepper" id="stepper">
-              <li data-step="team">
-                <span class="num">1</span>
-                <div><b>Склад команди</b><small></small></div>
-              </li>
-              <li data-step="apply">
-                <span class="num">2</span>
-                <div><b>Заявка</b><small></small></div>
-              </li>
-              <li data-step="ok">
-                <span class="num">3</span>
-                <div><b>Підтвердження</b><small></small></div>
-              </li>
-            </ol>
-            <a class="btn btn-primary" id="next-btn" href="team/index.html"
-              >Зібрати команду</a
-            >
-          </section>
-
-          <!-- Профіль капітана -->
-          <section class="card profile">
-            <span class="avatar avatar-xl">ДМ</span>
-            <h3>Драко Малфой</h3>
-            <p class="meta">46 років · шукач</p>
-            <dl class="facts">
-              <div>
-                <dt>Рівень</dt>
-                <dd>Seniors</dd>
-              </div>
-              <div>
-                <dt>Регіон</dt>
-                <dd>Південна Англія</dd>
-              </div>
-              <div>
-                <dt>Роль</dt>
-                <dd>Капітан команди</dd>
-              </div>
-            </dl>
-            <a
-              href="#"
-              class="small-link"
-              data-soon="Редагування профілю не входить у сценарій"
-              >Редагувати профіль</a
-            >
-          </section>
-
-          <!-- Моя команда -->
-          <section class="card team-card">
-            <div class="label">Моя команда</div>
-            <h3>
-              <span>Вілтширські виверни</span> ·
-              <span id="team-count">5 / 7</span>
-            </h3>
-            <ul class="slot-list" id="slot-list"></ul>
-            <a class="btn btn-dark" href="team/index.html">Відкрити склад</a>
-          </section>
-
-          <!-- Тиждень сортування -->
-          <section class="card info-card">
-            <div class="label">Тиждень сортування</div>
-            <h3>Що на вас чекає</h3>
-            <p>
-              Чемпіонат складається з тижня сортування та 10 основних тижнів
-              сезону. Ігри проходять по суботах, за потреби - також у неділю.
-            </p>
-            <ul class="ticks">
-              <li>Подати заявку може лише команда з повним складом 7 / 7.</li>
-              <li>Після подачі заявку перевіряє організатор ліги.</li>
-              <li>
-                Розклад кваліфікаційних матчів з’явиться після жеребкування.
-              </li>
-            </ul>
-          </section>
-
-          <!-- Сповіщення -->
-          <section class="card feed-card">
-            <div class="label">Сповіщення</div>
-            <ul class="feed" id="feed"></ul>
-          </section>
-        </div>
-      </div>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-links">
-          <a href="#" data-soon="Сторінка ліги поза сценарієм">Про лігу</a> ·
-          <a href="#" data-soon="Довідка поза сценарієм">FAQ</a> ·
-          <a href="#" data-soon="Контакти поза сценарієм">Контакти</a>
-        </div>
-        <button class="reset-link" id="reset-demo" type="button">
-          Скинути демо-дані
-        </button>
-      </div>
-    </footer>
-
-    <script src="js/data.js"></script>
-    <script src="js/store.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/home.js"></script>
-  </body>
+  <footer class="footer">Про лігу · FAQ · Контакти</footer>
+  <script src="js/app.js"></script>
+</body>
 </html>
